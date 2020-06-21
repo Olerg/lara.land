@@ -11,12 +11,12 @@
 |
 */
 
-Route::group(['middleware'=>'web', function(){
+Route::group(['middleware'=>'web'], function(){
     Route::match(['get', 'post'], '/',['uses'=>'IndexController@execute','as'=>'home']);
     Route::get('/page/{alias}',['uses'=>'PageController@execute', 'as'=>'page']);
 
     Route::auth();
-}]);
+});
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function (){
     Route::get('/', function (){
@@ -37,7 +37,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function (){
 
     });
 
-    oute::group(['prefix'=>'services'], function (){
+    Route::group(['prefix'=>'services'], function (){
         Route::get('/',['uses'=>'ServiceController@execute', 'as' =>'service']);
         Route::match(['get','post'],'/add',['uses'=>'ServiceAddController@execute', 'as' =>'serviceAdd']);
         Route::match(['get','post','delete'],'/edit/{service}',['uses'=>'ServiceEditController@execute', 'as' =>'serviceEdit']);
